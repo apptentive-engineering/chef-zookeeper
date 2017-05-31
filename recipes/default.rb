@@ -50,6 +50,7 @@ directory version_path do
   notifies :run, "execute[unpack zookeeper]"
 end
 
+
 remote_file zookeeper_tgz do
   source download_url
   notifies :run, "execute[unpack zookeeper]"
@@ -71,4 +72,9 @@ end
     group node["zookeeper"]["group"]
     recursive true
   end
+end
+
+directory '/var/log/zookeeper' do
+  owner node['zookeeper']['user']
+  group node['zookeeper']['user']
 end
